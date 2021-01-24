@@ -12,4 +12,17 @@ contract Bank{
     function getBalance() public view returns (uint){
         return balance[msg.sender];
     }
-}
+    
+    function transfer(address recipient, uint amount) public{
+        //check balance of msg.sender
+        
+        _transfer(msg.sender,recipient, amount);
+        
+        //event logs and furhter checks
+        
+    }
+    
+    function _transfer(address from, address to, uint amount) private{
+        balance[from] -= amount;
+        balance[to] += amount;
+    }
