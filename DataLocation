@@ -1,0 +1,15 @@
+pragma solidity 0.7.5;
+
+contract DataLocation{
+    
+    //storage - persistant data storage
+    //memory - temporary data storage
+    
+    //state variables
+    uint data = 123; //stored in storage
+    string lastText = "Hello Eduardo";
+    
+    function setString(string memory text) public{
+        lastText = text;
+    }
+}
