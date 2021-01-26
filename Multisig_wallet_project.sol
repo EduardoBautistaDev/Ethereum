@@ -12,7 +12,6 @@ contract Wallet {
         bool hasBeenSent;
         uint id;
     }
-    
     event TransferRequestCreated(uint _id, uint _amount, address _initiator, address _receiver);
     event ApprovalReceived(uint _id, uint _approvals, address _approver);
     event TransferApproved(uint _id);
@@ -21,7 +20,6 @@ contract Wallet {
     
     mapping(address => mapping(uint => bool)) approvals;
     
-    //Should only allow people in the owners list to continue the execution.
     modifier onlyOwners(){
         bool owner = false;
         for(uint i=0; i<owners.length;i++){
@@ -32,16 +30,13 @@ contract Wallet {
         require(owner == true);
         _;
     }
-    //Should initialize the owners list and the limit 
     constructor(address[] memory _owners, uint _limit) {
         owners = _owners;
         limit = _limit;
     }
     
-    //Empty function
     function deposit() public payable {}
     
-    //Create an instance of the Transfer struct and add it to the transferRequests array
     function createTransfer(uint _amount, address payable _receiver) public onlyOwners {
         emit TransferRequestCreated(transferRequests.length, _amount, msg.sender, _receiver);
         transferRequests.push(
@@ -67,7 +62,6 @@ contract Wallet {
         }
     }
     
-    //Should return all transfer requests
     function getTransferRequests() public view returns (Transfer[] memory){
         return transferRequests;
     }
