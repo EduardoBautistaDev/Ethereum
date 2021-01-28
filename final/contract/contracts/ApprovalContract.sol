@@ -15,7 +15,6 @@ contract ApprovalContract {
     sender = msg.sender;
     receiver = _receiver;
   }
-
   function viewApprover() external pure returns(address) {
     return(approver);
   }
